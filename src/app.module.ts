@@ -4,9 +4,18 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
+import { FilesController } from './files/files.controller';
+import { FilesModule } from './files/files.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { FilesService } from './files/files.service';
 
 @Module({
   imports: [
+
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..','public'),
+    }),
 
     ConfigModule.forRoot(),
 
@@ -22,9 +31,13 @@ import { SeedModule } from './seed/seed.module';
     }),
     AuthModule,
     CommonModule,
-    SeedModule
+    SeedModule,
+    FilesModule,
+    
   ],
-  controllers: [],
-  providers: [],
+  controllers: [FilesController],
+  providers: [
+    FilesService
+  ],
 })
 export class AppModule { }
