@@ -13,10 +13,6 @@ import { FilesService } from './files/files.service';
 @Module({
   imports: [
 
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..','public'),
-    }),
-
     ConfigModule.forRoot(),
 
     TypeOrmModule.forRoot({

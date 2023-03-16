@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
-import { Employee } from './employee.entity';
 
 @Entity('persons')
 export class Person {
@@ -31,9 +30,8 @@ export class Person {
     @Column({type: 'date', nullable: false})
     dob: Date
 
-    // @OneToOne(() => Employee,
-    //     employee => employee.person,)
-    // employee : Employee
+    @Column({type: 'varchar', length: 30, nullable: false, default: 'None'})
+    gender: string
 
     @CreateDateColumn({
         name: 'crated_at'
@@ -44,12 +42,6 @@ export class Person {
         name: 'updated_at'
     })
     updatedAt: string;
-
-    // @OneToOne(type => Cliente, cliente => cliente.persona)
-    // cliente: Cliente;
-
-    // @OneToOne(type => Trabajador, trabajador => trabajador.persona)
-    // trabajador: Trabajador;
 
     @BeforeInsert()
     checkFieldsBeforeInsert() {
